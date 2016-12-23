@@ -17,6 +17,12 @@ abstract class AbstractConverter implements RuleInterface
      */
     public function call($value)
     {
-        return $value;
+        return $this->convert($value);
     }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    abstract protected function convert($value);
 }
