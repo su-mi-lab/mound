@@ -65,7 +65,7 @@ $provider = new \Mound\Filter\Provider;
 $data = [
     'test_data1' => '',
     'test_data2' => 'test_data2',
-    'test_data3' => 'test'
+    'test_data3' => ''
 ];
 $provider
     ->rule('test_data1')
@@ -108,7 +108,7 @@ $error = $provider->exec($data);
 
 #$error = [
 #    'test_data1' => 'can't be blank',
-#    'test_data2' => 'can't be blank',
+#    'test_data3' => 'can't be blank',
 #];
 
 ```
