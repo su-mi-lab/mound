@@ -57,7 +57,17 @@ abstract class AbstractProvider implements ProviderInterface
      * @param array $data
      * @return array
      */
-    abstract protected function doExec(array $carry, string $key, array $data): array;
+    protected function doExec(array $carry, string $key, array $data): array
+    {
+        $rules = $this->rules[$key];
+        $value = $data[$key] ?? null;
+
+        if ($value === null) {
+            return $carry;
+        }
+
+        return $this->doExecRule($carry, $rules, $key, $value);
+    }
 
     /**
      * @param array $carry

@@ -1,18 +1,12 @@
 <?php
 
-
 use Mound\Validator;
 
-class ProviderTest extends TestCase
+class ValidateProviderTest extends TestCase
 {
-    function test()
+    function testSimpleValidateProvider()
     {
-        $this->assertEquals(true, true);
-    }
-
-    function testValidateProvider()
-    {
-        $provider = new Validator\Provider();
+        $provider = new Validator\Provider;
 
         $data = [
             'test_data1' => '',
@@ -22,7 +16,7 @@ class ProviderTest extends TestCase
 
         $provider
             ->rule('test_data1')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(\Mound\Validator\Rules\NotEmpty::class)->attach(\Mound\Validator\Rules\NotEmpty::class)
             ->rule('test_data2')
             ->attach(\Mound\Validator\Rules\NotEmpty::class)
             ->rule('test_data3')

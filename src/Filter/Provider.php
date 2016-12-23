@@ -14,24 +14,20 @@ class Provider extends AbstractProvider
 {
     /**
      * @param array $carry
-     * @param string $key
-     * @param array $data
-     * @return array
-     */
-    protected function doExec(array $carry, string $key, array $data): array
-    {
-        // TODO: Implement doExec() method.
-    }
-
-    /**
-     * @param array $carry
      * @param array $rules
      * @param $value
      * @return array
      */
     protected function doExecRule(array $carry, array $rules, string $name, $value): array
     {
-        // TODO: Implement doExecRule() method.
+        return array_reduce($rules, function ($carry, $rule) use ($value, $name) {
+            /** @var RuleInterface $rule */
+            if ($rule->call($value)) {
+                $carry[$name] = $value;
+            }
+
+            return $carry;
+        }, $carry);
     }
 
     /**

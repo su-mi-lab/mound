@@ -12,36 +12,6 @@ use Mound\RuleInterface;
  */
 class Provider extends AbstractProvider
 {
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function exec(array $data): array
-    {
-        return array_reduce(array_keys($this->rules), function ($carry, $key) use ($data) {
-            return $this->doExec($carry, $key, $data);
-        }, []);
-    }
-
-    /**
-     * @param array $carry
-     * @param string $key
-     * @param array $data
-     * @return array
-     */
-    protected function doExec(array $carry, string $key, array $data): array
-    {
-        $rules = $this->rules[$key];
-        $value = $data[$key] ?? null;
-
-        if ($value === null) {
-            return $carry;
-        }
-
-        return $this->doExecRule($carry, $rules, $key, $value);
-    }
-
     /**
      * @param array $carry
      * @param array $rules
@@ -51,6 +21,11 @@ class Provider extends AbstractProvider
     protected function doExecRule(array $carry, array $rules, string $name, $value): array
     {
         return array_reduce($rules, function ($carry, $rule) use ($value, $name) {
+
+            if (isset($carry[$name])) {
+                return $carry;
+            }
+
             /** @var AbstractValidator $rule */
             if (!$rule->call($value)) {
                 $carry[$name][] = $rule->message();
