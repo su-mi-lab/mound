@@ -3,7 +3,6 @@
 namespace Mound\Converter;
 
 use Mound\AbstractProvider;
-use Mound\Injection;
 use Mound\RuleInterface;
 
 /**
