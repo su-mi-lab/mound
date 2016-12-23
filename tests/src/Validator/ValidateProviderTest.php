@@ -19,6 +19,9 @@ class ValidateProviderTest extends TestCase
             ->attach(\Mound\Validator\Rules\NotEmpty::class)->attach(\Mound\Validator\Rules\NotEmpty::class)
             ->rule('test_data2')
             ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(\Mound\Validator\Rules\InArray::class, [
+                'haystack' => ['test_data2']
+            ])
             ->rule('test_data3')
             ->attach(\Mound\Validator\Rules\NotEmpty::class);
 
