@@ -1,0 +1,30 @@
+{
+    "name": "bank/mound",
+    "description": "Validator",
+    "keywords": ["Validator"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/su-mi-lab/mound/issues",
+        "source": "https://github.com/su-mi-lab/mound"
+    },
+    "authors": [
+        {
+            "name": "Yuta Sumiyoshi",
+            "email": "mail.sumimaru@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mound\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "php vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml tests"
+    }
+}
