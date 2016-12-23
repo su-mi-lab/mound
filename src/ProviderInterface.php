@@ -8,18 +8,23 @@ namespace Mound;
  */
 interface ProviderInterface
 {
+
     /**
-     * @param string $name
-     * @param array $keys
+     * @param string $key
+     * @return ProviderInterface
+     */
+    public function rule(string $key): ProviderInterface;
+
+    /**
+     * @param $rule
      * @param array $options
      * @return ProviderInterface
      */
-    public function attach(string $name, array $keys, array $options = []): static;
+    public function attach($rule, array $options = []): ProviderInterface;
 
     /**
      * @param array $data
-     * @param array $options
-     * @return ProviderInterface
+     * @return array
      */
-    public function exec(array $data, array $options = []): static;
+    public function exec(array $data): array;
 }

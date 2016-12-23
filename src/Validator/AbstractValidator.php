@@ -17,19 +17,9 @@ abstract class AbstractValidator implements RuleInterface, ValidatorRuleInterfac
     protected $message = '';
 
     /**
-     * @var bool
-     */
-    protected $next = false;
-
-    /**
      * @var array
      */
     protected $groups = [];
-
-    /**
-     * @var array
-     */
-    protected $options = [];
 
     /**
      * @var bool

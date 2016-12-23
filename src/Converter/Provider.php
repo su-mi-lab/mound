@@ -2,33 +2,55 @@
 
 namespace Mound\Converter;
 
-use Mound\ProviderInterface;
+use Mound\AbstractProvider;
+use Mound\Injection;
+use Mound\RuleInterface;
 
 /**
  * Class Provider
  * @package Mound\Converter
  */
-class Provider implements ProviderInterface
+class Provider extends AbstractProvider
 {
-
     /**
-     * @param string $name
-     * @param array $keys
-     * @param array $options
-     * @return Provider
-     */
-    public function attach(string $name, array $keys, array $options = []): Provider
-    {
-        return $this;
-    }
-
-    /**
+     * @param array $carry
+     * @param string $key
      * @param array $data
-     * @param array $options
-     * @return Provider
+     * @return array
      */
-    public function exec(array $data, array $options = []): Provider
+    protected function doExec(array $carry, string $key, array $data): array
     {
-        return $this;
+        // TODO: Implement doExec() method.
     }
+
+    /**
+     * @param array $carry
+     * @param array $rules
+     * @param $value
+     * @return array
+     */
+    protected function doExecRule(array $carry, array $rules, string $name, $value): array
+    {
+        // TODO: Implement doExecRule() method.
+    }
+
+    /**
+     * @param $rule
+     * @param array $options
+     * @return RuleInterface
+     * @throws \Exception
+     */
+    protected function factory($rule, array $options): RuleInterface
+    {
+        $injection = new Injection($rule);
+        $instance = $injection->newInstance($options);
+
+        if (!($instance instanceof AbstractConverter)) {
+            throw new \Exception('not instanceof AbstractConverter');
+        }
+
+        return $instance;
+    }
+
+
 }

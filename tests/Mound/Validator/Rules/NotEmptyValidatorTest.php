@@ -1,5 +1,6 @@
 <?php
 
+use Mound\Injection;
 use Mound\Validator\Rules\NotEmpty;
 
 class NotEmptyValidatorTest extends TestCase
@@ -25,6 +26,19 @@ class NotEmptyValidatorTest extends TestCase
         $validator = new NotEmpty();
         $validator->call('test');
         $this->assertEquals($validator->message(), null);
+    }
+
+    function testCustomMessage()
+    {
+        $options = [
+            'message' => 'test'
+        ];
+
+        $injection = new Injection('Mound\Validator\Rules\NotEmpty');
+        $validator = $injection->newInstance($options);
+
+        $validator->call('');
+        $this->assertEquals($validator->message(), "test");
     }
 
 }
