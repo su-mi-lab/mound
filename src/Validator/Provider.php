@@ -3,8 +3,6 @@
 namespace Mound\Validator;
 
 use Mound\AbstractProvider;
-use Mound\Injection;
-use Mound\RuleInterface;
 
 /**
  * Class Provider
