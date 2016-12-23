@@ -5,10 +5,10 @@ namespace Mound\Filter\Rules;
 use Mound\Filter\AbstractFilter;
 
 /**
- * Class NotEmptyFilter
+ * Class NotEmpty
  * @package Mound\Filter\Rules
  */
-class NotEmptyFilter extends AbstractFilter
+class NotEmpty extends AbstractFilter
 {
 
     /**

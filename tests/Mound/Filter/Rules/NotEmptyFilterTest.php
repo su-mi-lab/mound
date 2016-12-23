@@ -1,13 +1,13 @@
 <?php
 
-use Mound\Filter\Rules\NotEmptyFilter;
+use Mound\Filter\Rules\NotEmpty;
 
 class NotEmptyFilterTest extends TestCase
 {
 
     function testAllowNotEmptyFilter()
     {
-        $filter = new NotEmptyFilter;
+        $filter = new NotEmpty;
         $this->assertEquals($filter->call(1), true);
         $this->assertEquals($filter->call(0), true);
         $this->assertEquals($filter->call('1'), true);
@@ -17,7 +17,7 @@ class NotEmptyFilterTest extends TestCase
 
     function testDenyNotEmptyFilter()
     {
-        $filter = new NotEmptyFilter;
+        $filter = new NotEmpty;
         $this->assertEquals($filter->call(''), false);
         $this->assertEquals($filter->call(null), false);
         $this->assertEquals($filter->call([]), false);

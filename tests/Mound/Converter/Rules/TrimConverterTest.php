@@ -1,13 +1,13 @@
 <?php
 
-use Mound\Converter\Rules\TrimConverter;
+use Mound\Converter\Rules\Trim;
 
 class TrimConverterTest extends TestCase
 {
 
     function testTrimConverter()
     {
-        $converter = new TrimConverter;
+        $converter = new Trim;
 
         $this->assertEquals($converter->call(' 1 '), '1');
         $this->assertEquals($converter->call(' 1'), '1');

@@ -5,10 +5,10 @@ namespace Mound\Converter\Rules;
 use Mound\Converter\AbstractConverter;
 
 /**
- * Class TrimConverter
+ * Class Trim
  * @package Mound\Converter\Rules
  */
-class TrimConverter extends AbstractConverter
+class Trim extends AbstractConverter
 {
 
     /**
