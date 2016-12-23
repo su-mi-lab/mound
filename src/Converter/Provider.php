@@ -28,21 +28,11 @@ class Provider extends AbstractProvider
     }
 
     /**
-     * @param $rule
-     * @param array $options
-     * @return RuleInterface
-     * @throws \Exception
+     * @param $instance
+     * @return bool
      */
-    protected function factory($rule, array $options): RuleInterface
+    protected function isAllowInstance($instance): bool
     {
-        $injection = new Injection($rule);
-        $instance = $injection->newInstance($options);
-
-        if (!($instance instanceof AbstractConverter)) {
-            throw new \Exception('not instanceof AbstractConverter');
-        }
-
-        return $instance;
+        return ($instance instanceof AbstractConverter);
     }
-
 }
