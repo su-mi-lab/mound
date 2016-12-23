@@ -70,6 +70,24 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
+     * @param $rule
+     * @param array $options
+     * @return RuleInterface
+     * @throws \Exception
+     */
+    protected function factory($rule, array $options): RuleInterface
+    {
+        $injection = new Injection($rule);
+        $instance = $injection->newInstance($options);
+
+        if (!$this->isAllowInstance($instance)) {
+            throw new \Exception('Bat instance');
+        }
+
+        return $instance;
+    }
+
+    /**
      * @param array $carry
      * @param array $rules
      * @param $value
@@ -77,11 +95,10 @@ abstract class AbstractProvider implements ProviderInterface
      */
     abstract protected function doExecRule(array $carry, array $rules, string $name, $value): array;
 
-
     /**
-     * @param $rule
-     * @param array $options
-     * @return RuleInterface
+     * @param $instance
+     * @return bool
      */
-    abstract protected function factory($rule, array $options): RuleInterface;
+    abstract protected function isAllowInstance($instance): bool;
+
 }
