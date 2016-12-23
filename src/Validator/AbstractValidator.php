@@ -11,4 +11,12 @@ use Mound\RuleInterface;
 abstract class AbstractValidator implements RuleInterface
 {
 
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function call($value)
+    {
+        return $value;
+    }
 }

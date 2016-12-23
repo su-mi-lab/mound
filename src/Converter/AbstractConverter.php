@@ -11,4 +11,12 @@ use Mound\RuleInterface;
 abstract class AbstractConverter implements RuleInterface
 {
 
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function call($value)
+    {
+        return $value;
+    }
 }

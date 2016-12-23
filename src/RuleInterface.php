@@ -9,4 +9,9 @@ namespace Mound;
 interface RuleInterface
 {
 
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function call($value);
 }
