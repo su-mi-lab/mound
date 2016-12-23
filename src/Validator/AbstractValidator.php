@@ -8,15 +8,60 @@ use Mound\RuleInterface;
  * Class AbstractValidator
  * @package Mound\Validator
  */
-abstract class AbstractValidator implements RuleInterface
+abstract class AbstractValidator implements RuleInterface, ValidatorRuleInterface
 {
 
     /**
-     * @param $value
-     * @return mixed
+     * @var string
      */
-    public function call($value)
+    protected $message = '';
+
+    /**
+     * @var bool
+     */
+    protected $next = false;
+
+    /**
+     * @var array
+     */
+    protected $groups = [];
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @var bool
+     */
+    protected $valid = true;
+
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    public function call($value): bool
     {
-        return $value;
+        $this->valid = true;
+        return $this->validate($value);
     }
+
+    /**
+     * @return string|null
+     */
+    public function message()
+    {
+        if ($this->valid) {
+            return null;
+        }
+
+        return $this->message;
+    }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    abstract protected function validate($value): bool;
 }
