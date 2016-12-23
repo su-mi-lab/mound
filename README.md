@@ -115,3 +115,4 @@ $error = $provider->exec($data);
 
 ### Validator Rules
 * NotEmpty
+* InArray
