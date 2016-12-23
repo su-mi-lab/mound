@@ -10,7 +10,6 @@ use Mound\RuleInterface;
  */
 abstract class AbstractConverter implements RuleInterface
 {
-
     /**
      * @param $value
      * @return mixed

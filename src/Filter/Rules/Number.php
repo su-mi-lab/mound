@@ -4,9 +4,12 @@ namespace Mound\Filter\Rules;
 
 use Mound\Filter\AbstractFilter;
 
+/**
+ * Class Number
+ * @package Mound\Filter\Rules
+ */
 class Number extends AbstractFilter
 {
-
     /**
      * @param $value
      * @return bool

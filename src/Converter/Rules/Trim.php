@@ -10,7 +10,6 @@ use Mound\Converter\AbstractConverter;
  */
 class Trim extends AbstractConverter
 {
-
     /**
      * @param $value
      * @return string

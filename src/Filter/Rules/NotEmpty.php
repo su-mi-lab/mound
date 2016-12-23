@@ -10,7 +10,6 @@ use Mound\Filter\AbstractFilter;
  */
 class NotEmpty extends AbstractFilter
 {
-
     /**
      * @param $value
      * @return bool
