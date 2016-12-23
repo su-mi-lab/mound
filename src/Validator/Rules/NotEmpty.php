@@ -14,12 +14,10 @@ class NotEmpty extends AbstractValidator
     /**
      * NotEmpty constructor.
      * @param string $message
-     * @param array $groups
      */
-    function __construct($message = "can't be blank", $groups = [])
+    function __construct($message = "can't be blank")
     {
         $this->message = $message;
-        $this->groups = $groups;
     }
 
     /**
