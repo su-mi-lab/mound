@@ -96,6 +96,7 @@ $data = $provider->exec($data);
 
 #### Converter Rules
 * Trim
+* Callback
 
 ### Filter Provider
 
@@ -126,6 +127,7 @@ $data = $provider->exec($data);
 #### Filter Rules
 * NotEmpty
 * Number
+* Callback
 
 ### Validator Provider
 
