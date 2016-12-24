@@ -11,7 +11,8 @@ interface RuleInterface
 
     /**
      * @param $value
+     * @param array $context
      * @return mixed
      */
-    public function call($value);
+    public function call($value, array $context);
 }

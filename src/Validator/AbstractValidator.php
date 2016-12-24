@@ -24,12 +24,13 @@ abstract class AbstractValidator implements RuleInterface, ValidatorRuleInterfac
 
     /**
      * @param $value
+     * @param array $context
      * @return bool
      */
-    public function call($value): bool
+    public function call($value, array $context = []): bool
     {
         $this->valid = true;
-        return $this->validate($value);
+        return $this->validate($value, $context);
     }
 
     /**
@@ -46,7 +47,8 @@ abstract class AbstractValidator implements RuleInterface, ValidatorRuleInterfac
 
     /**
      * @param $value
+     * @param $context
      * @return bool
      */
-    abstract protected function validate($value): bool;
+    abstract protected function validate($value, array $context): bool;
 }

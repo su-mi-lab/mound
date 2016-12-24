@@ -66,7 +66,7 @@ abstract class AbstractProvider implements ProviderInterface
             return $carry;
         }
 
-        return $this->doExecRule($carry, $rules, $key, $value);
+        return $this->doExecRule($carry, $rules, $key, $value, $data);
     }
 
     /**
@@ -90,10 +90,12 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * @param array $carry
      * @param array $rules
+     * @param string $name
      * @param $value
+     * @param array $context
      * @return array
      */
-    abstract protected function doExecRule(array $carry, array $rules, string $name, $value): array;
+    abstract protected function doExecRule(array $carry, array $rules, string $name, $value, array $context): array;
 
     /**
      * @param $instance

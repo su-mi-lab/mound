@@ -29,10 +29,11 @@ class InArray extends AbstractValidator
 
     /**
      * @param $value
+     * @param array $context
      * @return bool
      * @throws \Exception
      */
-    protected function validate($value): bool
+    protected function validate($value, array $context): bool
     {
 
         if (!is_scalar($value) && !is_null($value)) {
