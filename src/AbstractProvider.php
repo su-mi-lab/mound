@@ -137,7 +137,7 @@ abstract class AbstractProvider implements ProviderInterface
      * @param string $groupName
      * @return array
      */
-    private function doAttachGroup(array $rules, string $groupName): array
+    protected function doAttachGroup(array $rules, string $groupName): array
     {
         return array_reduce(array_keys($this->groups[$groupName]), function ($rules, $key) use ($groupName) {
             $row = $this->groups[$groupName][$key];
@@ -151,12 +151,11 @@ abstract class AbstractProvider implements ProviderInterface
      * @param RuleInterface $rule
      * @return array
      */
-    private function doAttachGroupRule(array $rules, RuleInterface $rule): array
+    protected function doAttachGroupRule(array $rules, RuleInterface $rule): array
     {
         $rules[] = $rule;
         return $rules;
     }
-
 
     /**
      * @param array $carry
