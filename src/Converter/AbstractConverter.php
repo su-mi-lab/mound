@@ -11,19 +11,24 @@ use Mound\RuleInterface;
 abstract class AbstractConverter implements RuleInterface
 {
     /**
+     * @var array
+     */
+    protected $context = [];
+    
+    /**
      * @param $value
      * @param array $context
      * @return mixed
      */
     public function call($value, array $context = [])
     {
-        return $this->convert($value, $context);
+        $this->context = $context;
+        return $this->convert($value);
     }
 
     /**
      * @param $value
-     * @param array $context
      * @return mixed
      */
-    abstract protected function convert($value, array $context);
+    abstract protected function convert($value);
 }

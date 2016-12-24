@@ -12,10 +12,9 @@ class Trim extends AbstractConverter
 {
     /**
      * @param $value
-     * @param array $context
      * @return string
      */
-    protected function convert($value, array $context): string
+    protected function convert($value): string
     {
         $value = preg_replace('/^[ 　]+/u', ' ', $value);
         $value = preg_replace('/[ 　]+$/u', ' ', $value);

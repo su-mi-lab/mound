@@ -12,10 +12,9 @@ class Number extends AbstractFilter
 {
     /**
      * @param $value
-     * @param array $context
      * @return bool
      */
-    protected function isAllow($value, array $context): bool
+    protected function isAllow($value): bool
     {
         return is_numeric($value);
     }

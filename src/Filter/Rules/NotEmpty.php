@@ -14,11 +14,11 @@ class NotEmpty extends AbstractFilter
      * @param $value
      * @return bool
      */
-    protected function isAllow($value, array $context): bool
+    protected function isAllow($value): bool
     {
         if (is_array($value)) {
-            return (bool)array_filter($value, function ($row) use ($context) {
-                return $this->isAllow($row, $context);
+            return (bool)array_filter($value, function ($row) {
+                return $this->isAllow($row);
             });
         }
 

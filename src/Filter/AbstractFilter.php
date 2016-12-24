@@ -10,7 +10,11 @@ use Mound\RuleInterface;
  */
 abstract class AbstractFilter implements RuleInterface
 {
-
+    /**
+     * @var array
+     */
+    protected $context = [];
+    
     /**
      * @param $value
      * @param array $context
@@ -18,7 +22,8 @@ abstract class AbstractFilter implements RuleInterface
      */
     public function call($value, array $context = []): bool
     {
-        return $this->isAllow($value, $context);
+        $this->context = $context;
+        return $this->isAllow($value);
     }
 
     /**
@@ -26,5 +31,5 @@ abstract class AbstractFilter implements RuleInterface
      * @param array $context
      * @return bool
      */
-    abstract protected function isAllow($value, array $context): bool;
+    abstract protected function isAllow($value): bool;
 }
