@@ -17,10 +17,13 @@ class FilterProviderTest extends TestCase
         $provider
             ->rule('test_data1')
             ->attach(Filter\Rules\NotEmpty::class)
+            ->end
             ->rule('test_data2')
             ->attach(Filter\Rules\NotEmpty::class)
+            ->end
             ->rule('test_data3')
-            ->attach(Filter\Rules\NotEmpty::class);
+            ->attach(Filter\Rules\NotEmpty::class)
+            ->end;
 
 
         $data = $provider->exec($data);

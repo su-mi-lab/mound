@@ -38,10 +38,13 @@ $data = [
 $provider
     ->rule('test_data1')
     ->attach(\Mound\Converter\Rules\Trim::class)
+    ->end
     ->rule('test_data2')
     ->attach(\Mound\Converter\Rules\Trim::class)
+    ->end
     ->rule('test_data3')
-    ->attach(\Mound\Converter\Rules\Trim::class);
+    ->attach(\Mound\Converter\Rules\Trim::class)
+    ->end;
 
 $data = $provider->exec($data);
 
@@ -70,10 +73,13 @@ $data = [
 $provider
     ->rule('test_data1')
     ->attach(\Mound\Filter\Rules\NotEmpty::class)
+    ->end
     ->rule('test_data2')
     ->attach(\Mound\Filter\Rules\NotEmpty::class)
+    ->end
     ->rule('test_data3')
-    ->attach(\Mound\Filter\Rules\NotEmpty::class);
+    ->attach(\Mound\Filter\Rules\NotEmpty::class)
+    ->end;
 
 $data = $provider->exec($data);
 
@@ -97,13 +103,18 @@ $data = [
     'test_data2' => 'test_data2',
     'test_data3' => ''
 ];
+
 $provider
     ->rule('test_data1')
     ->attach(\Mound\Validator\Rules\NotEmpty
+    ->end
     ->rule('test_data2')
     ->attach(\Mound\Validator\Rules\NotEmpty
+    ->end
     ->rule('test_data3')
     ->attach(\Mound\Validator\Rules\NotEmpty
+    ->end;
+
 $error = $provider->exec($data);
 
 #$error = [

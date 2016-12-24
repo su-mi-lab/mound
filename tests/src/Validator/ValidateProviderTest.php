@@ -17,13 +17,16 @@ class ValidateProviderTest extends TestCase
         $provider
             ->rule('test_data1')
             ->attach(\Mound\Validator\Rules\NotEmpty::class)->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->end
             ->rule('test_data2')
             ->attach(\Mound\Validator\Rules\NotEmpty::class)
             ->attach(\Mound\Validator\Rules\InArray::class, [
                 'haystack' => ['test_data2']
             ])
+            ->end
             ->rule('test_data3')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class);
+            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->end;
 
         $error = $provider->exec($data);
 

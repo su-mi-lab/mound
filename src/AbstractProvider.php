@@ -5,6 +5,7 @@ namespace Mound;
 /**
  * Class AbstractProvider
  * @package Mound
+ *
  */
 abstract class AbstractProvider implements ProviderInterface
 {
@@ -102,5 +103,21 @@ abstract class AbstractProvider implements ProviderInterface
      * @return bool
      */
     abstract protected function isAllowInstance($instance): bool;
+
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'end':
+                $this->target = null;
+                return $this;
+            default:
+                return $this;
+        }
+
+    }
 
 }

@@ -8,7 +8,8 @@ use Mound\RuleInterface;
 /**
  * Class Provider
  * @package Mound\Converter
- */
+ *
+  */
 class Provider extends AbstractProvider
 {
     /**

@@ -17,10 +17,13 @@ class ConverterProviderTest extends TestCase
         $provider
             ->rule('test_data1')
             ->attach(Converter\Rules\Trim::class)
+            ->end
             ->rule('test_data2')
             ->attach(Converter\Rules\Trim::class)
+            ->end
             ->rule('test_data3')
-            ->attach(Converter\Rules\Trim::class);
+            ->attach(Converter\Rules\Trim::class)
+            ->end;
 
         $data = $provider->exec($data);
 

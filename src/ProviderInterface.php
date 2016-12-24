@@ -5,6 +5,8 @@ namespace Mound;
 /**
  * Interface ProviderInterface
  * @package Mound
+ *
+ * @property ProviderInterface $end
  */
 interface ProviderInterface
 {
