@@ -33,6 +33,7 @@ class Injection
             $parameters = $this->reader->getMethod('__construct')->getParameters();
             $args = $this->getArgument($parameters, $options);
         }
+
         return $this->reader->newInstanceArgs($args);
     }
 
@@ -67,6 +68,8 @@ class Injection
 
             if (isset($args[$parameterName])) {
                 $carry[$parameterName] = $args[$parameterName];
+            } else if ($parameter->isDefaultValueAvailable()) {
+                $carry[$parameterName] = $parameter->getDefaultValue();
             }
 
             return $carry;

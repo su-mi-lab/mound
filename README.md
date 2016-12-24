@@ -22,96 +22,152 @@ php composer.phar self-update
 php composer.phar install
 ```
 
-## Converter
 
+## Provider
+* Converter Provider
+* Filter Provider
+* Validator Provider
+
+### Use Provider
+
+Interface
+
+`public function attach($rule, array $options = []): ProviderInterface`
+
+`public function group(string $key): ProviderInterface`
+
+`public function attach($rule, array $options = []): ProviderInterface`
+
+`public function exec(array $data, array $groups): array`
+
+
+Attach rule
+
+```php
+$provider
+  ->rule($key_name)
+  ->attach(Rules::class, $options)
+  ->attach(Rules::class, $options)
+```
+
+Group rules
+
+```php
+$provider
+  ->group($group_name)
+  ->rule($key_name)
+  ->attach(Rules::class, $options)
+  ->attach(Rules::class, $options)
+```
+
+Execution
+
+```
+$provider->exec($data, $group_names);
+```
+
+
+### Converter Provider
+
+Convert parameters according to rules.
+
+Returned value is converted data.
+
+The rules that can be used are class that extends AbstractConverter.
+
+#### Example
 
 ```php
 
-$provider = new \Mound\Converter\Provider;
+use Mound\Converter;
 
-$data = [
-    'test_data1' => ' test_data1',
-    'test_data2' => 'test_data2 ',
-    'test_data3' => '　test_data3　'
-];
+$provider = new Converter\Provider;
+
+$data = ['test_data1' => ' test_data1'];
 
 $provider
-    ->rule('test_data1')
-    ->attach(\Mound\Converter\Rules\Trim::class)
-    ->rule('test_data2')
-    ->attach(\Mound\Converter\Rules\Trim::class)
-    ->rule('test_data3')
-    ->attach(\Mound\Converter\Rules\Trim::class);
+  ->rule('test_data1')
+    ->attach(Converter\Rules\Trim::class)
+  ->endRule
 
 $data = $provider->exec($data);
-
-#$data = [
-#    'test_data1' => 'test_data1',
-#    'test_data2' => 'test_data2',
-#    'test_data3' => 'test_data3'
-#];
-
+# ['test_data1' => 'test_data1']
 ```
 
-### Converter Rules
+#### Converter Rules
 * Trim
+* Callback
 
-## Filter
+### Filter Provider
+
+Filter parameters according to rules.
+
+Returned value is Filtering data.
+
+The rules that can be used are class that extends AbstractFilter.
+
+#### Example
 
 ```php
+use Mound\Filter;
 
-$provider = new \Mound\Filter\Provider;
+$provider = new Filter\Provider;
 
-$data = [
-    'test_data1' => '',
-    'test_data2' => 'test_data2',
-    'test_data3' => ''
-];
+$data = ['test_data1' => ' test_data1'];
+
 $provider
-    ->rule('test_data1')
-    ->attach(\Mound\Filter\Rules\NotEmpty::class)
-    ->rule('test_data2')
-    ->attach(\Mound\Filter\Rules\NotEmpty::class)
-    ->rule('test_data3')
-    ->attach(\Mound\Filter\Rules\NotEmpty::class);
+  ->rule('test_data1')
+    ->attach(Filter\Rules\NotEmpty::class)
+  ->endRule
 
 $data = $provider->exec($data);
-
-#$data = [
-#    'test_data2' => 'test_data2'
-#];
-
+# []
 ```
 
-### Filter Rules
+#### Filter Rules
 * NotEmpty
 * Number
+* Callback
 
-## Validator
+### Validator Provider
+
+Validate parameters according to rules.
+
+Returned value is error message.
+
+The rules that can be used are class that extends AbstractValidator.
+
+#### Example
 
 ```php
+use Mound\Validator;
 
-$provider = new \Mound\Validator\Provider;
+$provider = new Validator\Provider;
+
+$haystack = ['test_data'];
 $data = [
-    'test_data1' => '',
-    'test_data2' => 'test_data2',
-    'test_data3' => ''
+  'test_data1' => 'test_data1'
+  'test_data2' => ''
 ];
+
 $provider
-    ->rule('test_data1')
-    ->attach(\Mound\Validator\Rules\NotEmpty
-    ->rule('test_data2')
-    ->attach(\Mound\Validator\Rules\NotEmpty
-    ->rule('test_data3')
-    ->attach(\Mound\Validator\Rules\NotEmpty
+  ->rule('test_data1')->attach(Validator\Rules\NotEmpty::class)
+  ->rule('test_data2')->attach(Validator\Rules\NotEmpty::class)
+  ->group('in_array')->rule('test_data1')
+    ->attach(Validator\Rules\InArray::class, [
+      'haystack' => $haystack
+    ])
+  ->endGroup
+
 $error = $provider->exec($data);
+#['test_data2' => 'can't be blank']
 
-#$error = [
-#    'test_data1' => 'can't be blank',
-#    'test_data3' => 'can't be blank',
-#];
-
+$error = $provider->exec($data, ['in_array']);
+#['test_data1' => 'is invalid', 'test_data2' => 'can't be blank']
 ```
 
-### Validator Rules
+
+#### Validator Rules
 * NotEmpty
+* InArray
+* Callback
