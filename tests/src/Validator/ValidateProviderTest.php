@@ -16,16 +16,16 @@ class ValidateProviderTest extends TestCase
 
         $provider
             ->rule('test_data1')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(Validator\Rules\NotEmpty::class)
             ->endRule
             ->rule('test_data2')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
-            ->attach(\Mound\Validator\Rules\InArray::class, [
+            ->attach(Validator\Rules\NotEmpty::class)
+            ->attach(Validator\Rules\InArray::class, [
                 'haystack' => ['test_data2']
             ])
             ->endRule
             ->rule('test_data3')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(Validator\Rules\NotEmpty::class)
             ->endRule;
 
         $error = $provider->exec($data);
@@ -42,25 +42,31 @@ class ValidateProviderTest extends TestCase
         $haystack = ['test_data'];
         $data = [
             'test_data1' => 'test_data1',
-            'test_data2' => 'test_data2'
+            'test_data2' => 'test_data'
         ];
 
         $provider
             ->rule('test_data1')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(Validator\Rules\NotEmpty::class)
             ->endRule
             ->rule('test_data2')
-            ->attach(\Mound\Validator\Rules\NotEmpty::class)
+            ->attach(Validator\Rules\NotEmpty::class)
             ->endRule
             ->group('in_array')
             ->rule('test_data1')
-            ->attach(\Mound\Validator\Rules\InArray::class, [
+            ->attach(Validator\Rules\InArray::class, [
                 'haystack' => $haystack
             ])
             ->endRule
             ->rule('test_data2')
-            ->attach(\Mound\Validator\Rules\InArray::class, [
+            ->attach(Validator\Rules\InArray::class, [
                 'haystack' => $haystack
+            ])
+            ->attach(Validator\Rules\Callback::class, [
+                'message' => 'error',
+                'callback' => function ($value, $context) {
+                    return is_numeric($value);
+                }
             ])
             ->endRule
             ->endGroup;

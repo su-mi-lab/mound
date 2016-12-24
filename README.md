@@ -168,3 +168,4 @@ $error = $provider->exec($data, ['in_array']);
 #### Validator Rules
 * NotEmpty
 * InArray
+* Callback

@@ -26,6 +26,4 @@ class InArrayValidatorTest extends TestCase
         $this->assertEquals($validator->message(), "is invalid");
 
     }
-
-
 }
