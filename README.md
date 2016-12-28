@@ -32,7 +32,7 @@ php composer.phar install
 
 Interface
 
-`public function attach($rule, array $options = []): ProviderInterface`
+`public function rule(string $key): ProviderInterface;`
 
 `public function group(string $key): ProviderInterface`
 
